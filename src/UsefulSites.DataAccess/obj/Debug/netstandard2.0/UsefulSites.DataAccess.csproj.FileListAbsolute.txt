@@ -1,0 +1,9 @@
+C:\Users\pmichaels\Documents\Visual Studio 2017\Projects\UsefulSites\src\UsefulSites.DataAccess\obj\Debug\netstandard2.0\UsefulSites.DataAccess.csprojAssemblyReference.cache
+C:\Users\pmichaels\Documents\Visual Studio 2017\Projects\UsefulSites\src\UsefulSites.DataAccess\obj\Debug\netstandard2.0\UsefulSites.DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\pmichaels\Documents\Visual Studio 2017\Projects\UsefulSites\src\UsefulSites.DataAccess\obj\Debug\netstandard2.0\UsefulSites.DataAccess.AssemblyInfoInputs.cache
+C:\Users\pmichaels\Documents\Visual Studio 2017\Projects\UsefulSites\src\UsefulSites.DataAccess\obj\Debug\netstandard2.0\UsefulSites.DataAccess.AssemblyInfo.cs
+C:\Users\pmichaels\Documents\Visual Studio 2017\Projects\UsefulSites\src\UsefulSites.DataAccess\bin\Debug\netstandard2.0\UsefulSites.DataAccess.deps.json
+C:\Users\pmichaels\Documents\Visual Studio 2017\Projects\UsefulSites\src\UsefulSites.DataAccess\bin\Debug\netstandard2.0\UsefulSites.DataAccess.dll
+C:\Users\pmichaels\Documents\Visual Studio 2017\Projects\UsefulSites\src\UsefulSites.DataAccess\bin\Debug\netstandard2.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\pmichaels\Documents\Visual Studio 2017\Projects\UsefulSites\src\UsefulSites.DataAccess\bin\Debug\netstandard2.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.xml
+C:\Users\pmichaels\Documents\Visual Studio 2017\Projects\UsefulSites\src\UsefulSites.DataAccess\obj\Debug\netstandard2.0\UsefulSites.DataAccess.csproj.CopyComplete
