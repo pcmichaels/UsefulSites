@@ -41,8 +41,7 @@ namespace UsefulSites
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services
-                //.AddIdentity<IdentityUser, IdentityRole>()
+            services                
                 .AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationIdentityDbContext>();
 

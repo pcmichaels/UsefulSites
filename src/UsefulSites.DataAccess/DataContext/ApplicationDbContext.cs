@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using UsefulSites.DataAccess.Data;
 
 namespace UsefulSites.DataAccess.DataContext
 {
@@ -8,5 +9,8 @@ namespace UsefulSites.DataAccess.DataContext
             : base(options)
         {
         }
+
+        public DbSet<Resource> Resource { get; set; }
+        public DbSet<ResourceType> ResourceType { get; set; }
     }
 }
