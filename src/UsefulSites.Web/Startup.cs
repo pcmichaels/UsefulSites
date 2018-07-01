@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using UsefulSites.DataAccess.DataContext;
+using UsefulSites.DataAccess.Api;
 
 namespace UsefulSites
 {
@@ -44,6 +45,8 @@ namespace UsefulSites
             services                
                 .AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationIdentityDbContext>();
+
+            services.AddTransient<IWebSiteAccess, WebSiteAccess>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

@@ -15,5 +15,7 @@ namespace UsefulSites.DataAccess.Data
         public ResourceType ResourceType { get; set; } 
 
         public string Name { get; set; }
+
+        public string Description { get; set; }
     }
 }

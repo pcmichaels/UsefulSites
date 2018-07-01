@@ -1,0 +1,28 @@
+﻿@model UsefulSites.Web.Models.WebSiteListModel
+
+@{
+    ViewData["Title"] = "Web Site List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Sites</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.WebSiteModels) {
+        <tr>
+            <td>
+                item.Name
+            </td>
+            <td>
+                item.Description
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

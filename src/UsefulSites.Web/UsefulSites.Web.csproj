@@ -14,8 +14,4 @@
     <ProjectReference Include="..\UsefulSites.DataAccess\UsefulSites.DataAccess.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\WebSites\" />
-  </ItemGroup>
-
 </Project>

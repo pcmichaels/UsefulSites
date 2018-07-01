@@ -22,7 +22,7 @@ namespace UsefulSites.DataAccess.DataContext
 
             modelBuilder.Entity<ResourceType>().HasData(new Data.ResourceType()
             {
-                Id = 1,
+                Id = (int)ResourceTypeEnum.WebSite,
                 Name = "Web Site"                
             });
         }
