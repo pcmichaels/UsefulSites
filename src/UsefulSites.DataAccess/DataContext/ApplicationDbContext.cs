@@ -11,6 +11,11 @@ namespace UsefulSites.DataAccess.DataContext
         }
 
         public DbSet<Resource> Resource { get; set; }
+
         public DbSet<ResourceType> ResourceType { get; set; }
+
+        public DbSet<ResourceRequest> ResourceRequest { get; set; }
+        
+
     }
 }

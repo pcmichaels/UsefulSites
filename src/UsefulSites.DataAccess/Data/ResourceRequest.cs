@@ -6,15 +6,16 @@ using System.Text;
 
 namespace UsefulSites.DataAccess.Data
 {
-    public class Resource : BaseDataEntity
-    {        
+    public class ResourceRequest : BaseDataEntity
+    {
+        [Key]
         public int Id { get; set; }
 
         public int ResourceTypeId { get; set; }
 
         [ForeignKey("ResourceTypeId")]
-        public ResourceType ResourceType { get; set; } 
+        public ResourceType ResourceType { get; set; }
 
-        public string Name { get; set; }
+
     }
 }

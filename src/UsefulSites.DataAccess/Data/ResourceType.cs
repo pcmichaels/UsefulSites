@@ -5,7 +5,7 @@ using System.Text;
 
 namespace UsefulSites.DataAccess.Data
 {
-    public class ResourceType
+    public class ResourceType : BaseDataEntity
     {
         [Key]
         public int Id { get; set; }
