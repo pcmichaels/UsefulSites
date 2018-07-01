@@ -8,14 +8,13 @@ namespace UsefulSites.DataAccess.Data
 {
     public class ResourceRequest : BaseDataEntity
     {
-        [Key]
-        public int Id { get; set; }
 
         public int ResourceTypeId { get; set; }
 
         [ForeignKey("ResourceTypeId")]
         public ResourceType ResourceType { get; set; }
 
-
+        // ToDo: Link this to the user ID in the other context
+        public int RequestorUserId { get; set; }
     }
 }

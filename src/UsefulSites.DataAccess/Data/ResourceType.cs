@@ -7,8 +7,6 @@ namespace UsefulSites.DataAccess.Data
 {
     public class ResourceType : BaseDataEntity
     {
-        [Key]
-        public int Id { get; set; }
         public string Name { get; set; }
         
     }

@@ -7,8 +7,7 @@ using System.Text;
 namespace UsefulSites.DataAccess.Data
 {
     public class Resource : BaseDataEntity
-    {        
-        public int Id { get; set; }
+    {                
 
         public int ResourceTypeId { get; set; }
 
