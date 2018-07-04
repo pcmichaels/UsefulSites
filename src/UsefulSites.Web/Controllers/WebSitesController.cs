@@ -10,9 +10,9 @@ namespace UsefulSites.Web.Controllers
 {
     public class WebSitesController : Controller
     {
-        private readonly IWebSiteAccess _webSiteAccess;
+        private readonly IWebSiteDataAccess _webSiteAccess;
 
-        public WebSitesController(IWebSiteAccess webSiteAccess)
+        public WebSitesController(IWebSiteDataAccess webSiteAccess)
         {
             _webSiteAccess = webSiteAccess;
         }

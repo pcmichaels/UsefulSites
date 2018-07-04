@@ -5,7 +5,7 @@ using UsefulSites.DataAccess.Data;
 
 namespace UsefulSites.DataAccess.Api
 {
-    public interface IWebSiteAccess
+    public interface IWebSiteDataAccess
     {
         IList<Resource> GetAllWebSites();
     }

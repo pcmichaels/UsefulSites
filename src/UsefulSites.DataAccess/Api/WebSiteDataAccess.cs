@@ -8,11 +8,11 @@ using UsefulSites.DataAccess.DataContext;
 
 namespace UsefulSites.DataAccess.Api
 {
-    public class WebSiteAccess : IWebSiteAccess
+    public class WebSiteDataAccess : IWebSiteDataAccess
     {
         private readonly ApplicationDbContext _applicationDbContext;
 
-        public WebSiteAccess(ApplicationDbContext context)
+        public WebSiteDataAccess(ApplicationDbContext context)
         {
             _applicationDbContext = context;
         }
