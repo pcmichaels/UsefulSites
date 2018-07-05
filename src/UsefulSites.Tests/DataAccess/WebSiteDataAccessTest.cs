@@ -44,7 +44,7 @@ namespace UsefulSites.Tests
             var webSites = webSiteDataAccess.GetAllWebSites();
 
             // Assert
-            Assert.Equal(2, webSites.Count());
+            Assert.Equal(3, webSites.Count());
             Assert.Equal(1, webSites.First().Id);
 
         }
