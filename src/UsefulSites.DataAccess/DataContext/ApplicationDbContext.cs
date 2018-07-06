@@ -12,11 +12,12 @@ namespace UsefulSites.DataAccess.DataContext
         {
         }
 
-        public DbSet<Resource> Resource { get; set; }
+        public DbSet<Resource> Resources { get; set; }
 
-        public DbSet<ResourceType> ResourceType { get; set; }
+        public DbSet<ResourceType> ResourceTypes { get; set; }
 
-        public DbSet<ResourceRequest> ResourceRequest { get; set; }
+        public DbSet<ResourceRequest> ResourceRequests { get; set; }
+        public DbSet<ResourceCategory> ResourceCategories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

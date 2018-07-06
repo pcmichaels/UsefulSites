@@ -7,6 +7,7 @@ namespace UsefulSites.DataAccess.Api
 {
     public interface IWebSiteDataAccess
     {
-        IList<Resource> GetAllWebSites();
+        IEnumerable<Resource> GetAllWebSites();
+        IEnumerable<Resource> GetCategoryWebSites(int categoryId);
     }
 }

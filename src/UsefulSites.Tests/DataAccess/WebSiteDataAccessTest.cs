@@ -19,34 +19,118 @@ namespace UsefulSites.Tests
                 new DbContextOptionsBuilder<ApplicationDbContext>()
                      .UseInMemoryDatabase(Guid.NewGuid().ToString())
                      .Options;
-            var context = new ApplicationDbContext(options);            
-            context.ResourceType.AddRange(
-                new ResourceType() { Id = 1, Name = "website" },
-                new ResourceType() { Id = 2, Name = "utility" }
-            );
-            context.SaveChanges();
+            using (var context = new ApplicationDbContext(options))
+            {
+                context.Database.EnsureDeleted();
 
-            context.Resource.AddRange(
-                new Resource { Id = 1, Name = "test", Description = "test",
-                    ResourceType = context.ResourceType.First(a => a.Id == 1) },
-                new Resource { Id = 2, Name = "test2", Description = "test2",
-                    ResourceType = context.ResourceType.First(a => a.Id == 1) },
-                new Resource { Id = 3, Name = "test3", Description = "test2",
-                    ResourceType = context.ResourceType.First(a => a.Id == 1) },
-                new Resource { Id = 4, Name = "test4", Description = "test3",
-                    ResourceType = context.ResourceType.First(a => a.Id == 2)}
-            );
-            context.SaveChanges();
+                AddResourceTypes(context);
+                AddCategories(context);
 
-            var webSiteDataAccess = new WebSiteDataAccess(context);
+                context.Resources.AddRange(
+                    new Resource("test", "test",
+                        context.ResourceTypes.First(a => a.Id == 1),
+                        context.ResourceCategories.First(a => a.Id == 1)),
+                    new Resource
+                    {                        
+                        Name = "test2",
+                        Description = "test2",
+                        ResourceType = context.ResourceTypes.First(a => a.Id == 1)
+                    },
+                    new Resource
+                    {                     
+                        Name = "test3",
+                        Description = "test2",
+                        ResourceType = context.ResourceTypes.First(a => a.Id == 1)
+                    },
+                    new Resource
+                    {                     
+                        Name = "test4",
+                        Description = "test3",
+                        ResourceType = context.ResourceTypes.First(a => a.Id == 2)
+                    }
+                );
+                context.SaveChanges();
 
-            // Act
-            var webSites = webSiteDataAccess.GetAllWebSites();
+                var webSiteDataAccess = new WebSiteDataAccess(context);
 
-            // Assert
-            Assert.Equal(3, webSites.Count());
-            Assert.Equal(1, webSites.First().Id);
+                // Act
+                var webSites = webSiteDataAccess.GetAllWebSites();
 
+                // Assert
+                Assert.Equal(3, webSites.Count());
+                Assert.Equal("test", webSites.First().Name);
+            }
         }
+
+        private static void AddResourceTypes(ApplicationDbContext context)
+        {
+            context.ResourceTypes.AddRange(
+                new ResourceType() { Id = 1, Name = "Web Sites" },
+                new ResourceType() { Id = 2, Name = "Utilities / Tools" },
+                new ResourceType() { Id = 3, Name = "Videos" }
+            );
+            context.SaveChanges();
+        }
+
+        private static void AddCategories(ApplicationDbContext context)
+        {
+            context.ResourceCategories.AddRange(
+                new ResourceCategory() { Id = 1, Name = "Programming / Development" },
+                new ResourceCategory() { Id = 2, Name = "Social" },
+                new ResourceCategory() { Id = 3, Name = "Blogs" });
+
+            context.SaveChanges();
+        }
+
+        [Fact]
+        public void GetCategoryWebSites_ReturnsWebSites()
+        {
+            // Arrange
+            var options =
+                new DbContextOptionsBuilder<ApplicationDbContext>()
+                     .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                     .Options;
+            using (var context = new ApplicationDbContext(options))
+            {
+                context.Database.EnsureDeleted();
+
+                AddResourceTypes(context);
+                AddCategories(context);
+
+                context.Resources.AddRange(
+                    new Resource("test", "test",
+                        context.ResourceTypes.First(a => a.Id == 1),
+                        context.ResourceCategories.First(a => a.Id == 1)),
+                    new Resource("test2", "test2",
+                        context.ResourceTypes.First(a => a.Id == 1),
+                        context.ResourceCategories.First(a => a.Id == 1)),
+                    new Resource
+                    {
+                        Id = 3,
+                        Name = "test3",
+                        Description = "test2",
+                        ResourceType = context.ResourceTypes.First(a => a.Id == 1)
+                    },
+                    new Resource
+                    {
+                        Id = 4,
+                        Name = "test4",
+                        Description = "test3",
+                        ResourceType = context.ResourceTypes.First(a => a.Id == 2)
+                    }
+                );
+                context.SaveChanges();
+
+                var webSiteDataAccess = new WebSiteDataAccess(context);
+
+                // Act
+                var webSites = webSiteDataAccess.GetCategoryWebSites(1);
+
+                // Assert
+                Assert.Equal(2, webSites.Count());
+                Assert.Equal("Programming / Development", webSites.First().ResourceCategory.Name);
+            }
+        }
+
     }
 }

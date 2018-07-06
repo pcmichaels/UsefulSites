@@ -17,10 +17,17 @@ namespace UsefulSites.DataAccess.Api
             _applicationDbContext = context;
         }
 
-        public IList<Resource> GetAllWebSites()
+        public IEnumerable<Resource> GetAllWebSites()
         {
-            return _applicationDbContext.Resource.Where(a => a.ResourceType.Id == 1).ToList();
+            return _applicationDbContext.Resources
+                .Where(a => a.ResourceType.Id == 1).ToList();
         }
 
+        public IEnumerable<Resource> GetCategoryWebSites(int categoryId)
+        {
+            return _applicationDbContext.Resources
+                .Where(a => a.ResourceType.Id == 1
+                && a.ResourceCategoryId == categoryId).ToList();
+        }
     }
 }
