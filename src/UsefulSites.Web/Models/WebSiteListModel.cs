@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace UsefulSites.Web.Models
 {
     public class WebSiteListModel
-    {
-        public List<WebSiteModel> WebSiteModels { get; set; }
+    {        
+        public IEnumerable<CategoryModel> Categories { get; set; }
     }
 }

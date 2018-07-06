@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace UsefulSites.DataAccess.Migrations.ApplicationDb
 {
-    public partial class AdddDefaultDates : Migration
+    public partial class AddDefaultDates : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

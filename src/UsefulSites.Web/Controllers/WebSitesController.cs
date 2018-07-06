@@ -22,11 +22,14 @@ namespace UsefulSites.Web.Controllers
             var allSites = _webSiteAccess.GetAllWebSites();
             WebSiteListModel webSiteListModel = new WebSiteListModel()
             {
-                WebSiteModels = allSites.Select(a => new WebSiteModel()
+                Categories = allSites.GroupBy(a => a.ResourceCategoryId).Select(a => new CategoryModel()
                 {
-                    Url = a.Name,
-                    Description = a.Description
-                }).ToList()
+                    WebSiteModels = a.Select(b => new WebSiteModel()
+                    {
+                        Url = b.Name,
+                        Description = b.Description
+                    })
+                })
             };
 
             return View(webSiteListModel);

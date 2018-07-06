@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace UsefulSites.Web.Models
 {
-    public class WebSiteModel
+    public class CategoryModel
     {
-        public string Url { get; set; }
-        public string Description { get; set; }        
+        public string CategoryName { get; set; }
+        public IEnumerable<WebSiteModel> WebSiteModels { get; set; }
     }
 }
