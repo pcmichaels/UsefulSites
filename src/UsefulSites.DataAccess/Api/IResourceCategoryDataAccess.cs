@@ -4,7 +4,8 @@ using System.Text;
 
 namespace UsefulSites.DataAccess.Api
 {
-    public class IResourceCategoryDataAccess
+    public interface IResourceCategoryDataAccess
     {
+        int AddCategory(string categoryName);
     }
 }

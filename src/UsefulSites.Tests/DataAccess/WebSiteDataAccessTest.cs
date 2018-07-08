@@ -11,15 +11,21 @@ namespace UsefulSites.Tests
 {
     public class WebSiteDataAccessTest
     {
+        DbContextOptions<ApplicationDbContext> _options;
+
+        public WebSiteDataAccessTest()
+        {
+            _options =
+                new DbContextOptionsBuilder<ApplicationDbContext>()
+                     .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                     .Options;
+        }
+
         [Fact]
         public void GetAllWebSites_ReturnsWebSites()
         {
             // Arrange
-            var options = 
-                new DbContextOptionsBuilder<ApplicationDbContext>()
-                     .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                     .Options;
-            using (var context = new ApplicationDbContext(options))
+            using (var context = new ApplicationDbContext(_options))
             {
                 context.Database.EnsureDeleted();
 
@@ -30,28 +36,19 @@ namespace UsefulSites.Tests
                     new Resource("test", "test",
                         context.ResourceTypes.First(a => a.Id == 1),
                         context.ResourceCategories.First(a => a.Id == 1)),
-                    new Resource
-                    {                        
-                        Name = "test2",
-                        Description = "test2",
-                        ResourceType = context.ResourceTypes.First(a => a.Id == 1)
-                    },
-                    new Resource
-                    {                     
-                        Name = "test3",
-                        Description = "test2",
-                        ResourceType = context.ResourceTypes.First(a => a.Id == 1)
-                    },
-                    new Resource
-                    {                     
-                        Name = "test4",
-                        Description = "test3",
-                        ResourceType = context.ResourceTypes.First(a => a.Id == 2)
-                    }
+                    new Resource("test2", "test2",
+                        context.ResourceTypes.First(a => a.Id == 1),
+                        context.ResourceCategories.First(a => a.Id == 1)),
+                    new Resource("test3", "test3",
+                        context.ResourceTypes.First(a => a.Id == 2),
+                        context.ResourceCategories.First(a => a.Id == 1)),
+                    new Resource("test3", "test3",
+                        context.ResourceTypes.First(a => a.Id == 1),
+                        context.ResourceCategories.First(a => a.Id == 2))
                 );
                 context.SaveChanges();
 
-                var webSiteDataAccess = new WebSiteDataAccess(context);
+                IWebSiteDataAccess webSiteDataAccess = new WebSiteDataAccess(context);
 
                 // Act
                 var webSites = webSiteDataAccess.GetAllWebSites();
@@ -86,11 +83,7 @@ namespace UsefulSites.Tests
         public void GetCategoryWebSites_ReturnsWebSites()
         {
             // Arrange
-            var options =
-                new DbContextOptionsBuilder<ApplicationDbContext>()
-                     .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                     .Options;
-            using (var context = new ApplicationDbContext(options))
+            using (var context = new ApplicationDbContext(_options))
             {
                 context.Database.EnsureDeleted();
 
