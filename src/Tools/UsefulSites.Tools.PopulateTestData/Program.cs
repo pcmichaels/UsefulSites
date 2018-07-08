@@ -75,7 +75,7 @@ namespace UsefulSites.Tools.PopulateTestData
             string returnString = string.Empty;
             for (int i = 1; i < length; i++)
             {
-                returnString += (char)_random.Next(26) + 97;
+                returnString += (char)(_random.Next(26) + 97);
             }
 
             return returnString;
