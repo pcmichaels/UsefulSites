@@ -36,8 +36,8 @@ namespace UsefulSites.DataAccess.Api
             {
                 ResourceCategoryId = category,
                 ResourceTypeId = 1,
-                Description = webSiteAddress,
-                Name = siteName
+                Description = siteName,
+                Name = webSiteAddress
             };
 
             _applicationDbContext.Resources.Add(resource);

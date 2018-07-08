@@ -7,17 +7,11 @@
 
 <h2>Sites</h2>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th></th>
-        </tr>
-    </thead>
+@foreach (var category in Model.Categories.OrderBy(a => a.CategoryName))
+{
+    <h1>@category.CategoryName</h1>
 
-    @foreach (var category in Model.Categories.OrderBy(a => a.CategoryName))
-    {
-        <h1>@category.CategoryName</h1>
-
+    <table class="table">
         <tbody>
             @foreach (var item in category.WebSiteModels)
             {
@@ -31,5 +25,6 @@
                 </tr>
             }
         </tbody>
-    }
+
     </table>
+}
