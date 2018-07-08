@@ -30,7 +30,7 @@ namespace UsefulSites.DataAccess.Api
                 && a.ResourceCategoryId == categoryId).ToList();
         }
 
-        public void CreateWebSite(int category, string siteName, string webSiteAddress)
+        public int CreateWebSite(int category, string siteName, string webSiteAddress)
         {
             Resource resource = new Resource()
             {
@@ -42,6 +42,8 @@ namespace UsefulSites.DataAccess.Api
 
             _applicationDbContext.Resources.Add(resource);
             _applicationDbContext.SaveChanges();
+
+            return resource.Id;
         }
     }
 }

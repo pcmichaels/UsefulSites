@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using System;
 using System.IO;
+using System.Linq;
 using UsefulSites.DataAccess.Api;
 using UsefulSites.DataAccess.DataContext;
 
@@ -18,7 +19,7 @@ namespace UsefulSites.Tools.PopulateTestData
 
             ConsoleKeyInfo key = Console.ReadKey();
 
-            if (key.Key != ConsoleKey.Y) return;            
+            if (key.Key != ConsoleKey.Y) return;
 
             var builder = new ConfigurationBuilder()
                            .SetBasePath(Directory.GetCurrentDirectory())
@@ -31,24 +32,41 @@ namespace UsefulSites.Tools.PopulateTestData
             var options =
                 new DbContextOptionsBuilder<ApplicationDbContext>()
                      .UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
+                     .EnableSensitiveDataLogging()
                      .Options;
             ApplicationDbContext applicationDbContext = new ApplicationDbContext(options);
 
             WebSiteDataAccess wda = new WebSiteDataAccess(applicationDbContext);
             ResourceCategoryDataAccess resourceCategoryDataAccess = new ResourceCategoryDataAccess(applicationDbContext);
 
-            int[] categories = new int[3];
-            categories[0] = resourceCategoryDataAccess.AddCategory("Software Development");
-            categories[1] = resourceCategoryDataAccess.AddCategory("Travel");
-            categories[2] = resourceCategoryDataAccess.AddCategory("Gambling");
+            int[] categories = GetCategories(resourceCategoryDataAccess);
 
             for (int i = 1; i <= 100; i++)
             {
-                int category = _random.Next(categories.Length);                
+                int category = _random.Next(categories.Length);
                 string webSiteAddress = $"www.{CreateWebAddress()}.{GetExtension()}";
 
-                wda.CreateWebSite(category, $"Test web site {i}", webSiteAddress);
+                wda.CreateWebSite(categories[category], $"Test web site {i}", webSiteAddress);
             }
+        }
+
+        private static int[] GetCategories(ResourceCategoryDataAccess resourceCategoryDataAccess)
+        {
+            int[] categories = new int[3];
+            var resourceCategories = resourceCategoryDataAccess.GetAllCategories();
+            if (resourceCategories.Any())
+            {
+                categories[0] = resourceCategories.First().Id;
+                categories[1] = resourceCategories.Skip(1).First().Id;
+                categories[2] = resourceCategories.Skip(2).First().Id;
+            }
+            else
+            {
+                categories[0] = resourceCategoryDataAccess.AddCategory("Software Development");
+                categories[1] = resourceCategoryDataAccess.AddCategory("Travel");
+                categories[2] = resourceCategoryDataAccess.AddCategory("Gambling");
+            }
+            return categories;
         }
 
         private static string CreateWebAddress()

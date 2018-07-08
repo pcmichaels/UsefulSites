@@ -9,5 +9,7 @@ namespace UsefulSites.DataAccess.Api
     {
         IEnumerable<Resource> GetAllWebSites();
         IEnumerable<Resource> GetCategoryWebSites(int categoryId);
+
+        int CreateWebSite(int category, string siteName, string webSiteAddress);
     }
 }

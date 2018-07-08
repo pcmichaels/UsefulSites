@@ -31,14 +31,6 @@ namespace UsefulSites.DataAccess.DataContext
                 UpdatedDate = new DateTime(2018, 07, 03)
             });
 
-            modelBuilder.Entity<ResourceType>().HasData(new Data.ResourceCategory()
-            {
-                Id = (int)ResourceTypeEnum.WebSite,
-                Name = "Web Site",
-                CreatedDate = new DateTime(2018, 07, 03),
-                UpdatedDate = new DateTime(2018, 07, 03)
-            });
-
             foreach (var entityType in modelBuilder.Model.GetEntityTypes()
                 .Where(t => t.ClrType.IsSubclassOf(typeof(BaseDataEntity))))
             {
