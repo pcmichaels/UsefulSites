@@ -28,7 +28,8 @@ namespace UsefulSites.Web.Controllers
                     {
                         Url = b.Name,
                         Description = b.Description
-                    })
+                    }),
+                    CategoryName = a.First().ResourceCategory.Name
                 })
             };
 

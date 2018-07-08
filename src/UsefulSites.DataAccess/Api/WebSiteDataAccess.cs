@@ -19,7 +19,7 @@ namespace UsefulSites.DataAccess.Api
 
         public IEnumerable<Resource> GetAllWebSites()
         {
-            return _applicationDbContext.Resources
+            return _applicationDbContext.Resources.Include(a => a.ResourceCategory)
                 .Where(a => a.ResourceType.Id == 1).ToList();
         }
 
