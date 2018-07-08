@@ -29,5 +29,19 @@ namespace UsefulSites.DataAccess.Api
                 .Where(a => a.ResourceType.Id == 1
                 && a.ResourceCategoryId == categoryId).ToList();
         }
+
+        public void CreateWebSite(int category, string siteName, string webSiteAddress)
+        {
+            Resource resource = new Resource()
+            {
+                ResourceCategoryId = category,
+                ResourceTypeId = 1,
+                Description = webSiteAddress,
+                Name = siteName
+            };
+
+            _applicationDbContext.Resources.Add(resource);
+            _applicationDbContext.SaveChanges();
+        }
     }
 }
