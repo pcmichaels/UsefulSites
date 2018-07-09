@@ -7,19 +7,11 @@ using UsefulSites.DataAccess.Data;
 using UsefulSites.DataAccess.DataContext;
 using Xunit;
 
-namespace UsefulSites.Tests
+namespace UsefulSites.Tests.DataAccess
 {
-    public class WebSiteDataAccessTest
+    public class WebSiteDataAccessTest : BaseDataAccessTest
     {
-        DbContextOptions<ApplicationDbContext> _options;
-
-        public WebSiteDataAccessTest()
-        {
-            _options =
-                new DbContextOptionsBuilder<ApplicationDbContext>()
-                     .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                     .Options;
-        }
+        public WebSiteDataAccessTest() : base() { }
 
         [Fact]
         public void GetAllWebSites_ReturnsWebSites()

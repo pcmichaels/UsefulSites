@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using UsefulSites.DataAccess.Api;
 using UsefulSites.Web.Models;
+using UsefulSites.Web.ViewModels;
 
 namespace UsefulSites.Web.Controllers
 {
@@ -20,7 +21,7 @@ namespace UsefulSites.Web.Controllers
         public IActionResult WebSiteList()
         {
             var allSites = _webSiteAccess.GetAllWebSites();
-            WebSiteListModel webSiteListModel = new WebSiteListModel()
+            WebSiteListViewModel webSiteListModel = new WebSiteListViewModel()
             {
                 Categories = allSites.GroupBy(a => a.ResourceCategoryId).Select(a => new CategoryModel()
                 {

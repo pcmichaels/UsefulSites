@@ -7,18 +7,12 @@ using UsefulSites.DataAccess.Data;
 using UsefulSites.DataAccess.DataContext;
 using Xunit;
 
-namespace UsefulSites.Tests
+namespace UsefulSites.Tests.DataAccess
 {
-    public class CategoryDataAccessTest
+    public class CategoryDataAccessTest : BaseDataAccessTest
     {
-        DbContextOptions<ApplicationDbContext> _options;
 
-        public CategoryDataAccessTest()
-        {
-            _options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                .Options;
-        }
+        public CategoryDataAccessTest() : base() { }
 
         [Fact]
         public void AddCategory_AddsCategory()

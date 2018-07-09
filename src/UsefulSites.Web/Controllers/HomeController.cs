@@ -1,17 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using UsefulSites.Models;
+using UsefulSites.DataAccess.Api;
+using UsefulSites.Web.ViewModels;
 
 namespace UsefulSites.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index(IResourceTypeDataAccess resourceTypeDataAccess)
         {
+            MainViewModel mainViewModel = new MainViewModel();
+            var allResources = resourceTypeDataAccess.GetAllResources();
+            foreach(var resource in allResources)
+            {
+
+            }
+
+            //mainViewModel.TopResources = 
+
             return View();
         }
 
