@@ -14,6 +14,7 @@ namespace UsefulSites.Tests.DataAccess
         {
             _options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                .EnableSensitiveDataLogging()                
                 .Options;
         }
     }

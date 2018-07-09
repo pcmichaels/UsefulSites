@@ -5,11 +5,12 @@ using UsefulSites.DataAccess.Data;
 
 namespace UsefulSites.DataAccess.Api
 {
-    public interface IWebSiteDataAccess
+    public interface IResourceDataAccess
     {
         IEnumerable<Resource> GetAllWebSites();
         IEnumerable<Resource> GetCategoryWebSites(int categoryId);
-
         int CreateWebSite(int category, string siteName, string webSiteAddress);
+        IEnumerable<Resource> GetResourceByType(int typeId);
+
     }
 }

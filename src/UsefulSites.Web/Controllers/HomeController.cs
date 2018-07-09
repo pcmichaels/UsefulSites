@@ -1,24 +1,62 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using UsefulSites.DataAccess.Api;
+using UsefulSites.Web.Models;
 using UsefulSites.Web.ViewModels;
 
 namespace UsefulSites.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index(IResourceTypeDataAccess resourceTypeDataAccess)
+        private readonly IResourceTypeDataAccess _resourceTypeDataAccess;
+        private readonly IResourceDataAccess _resourceDataAccess;
+
+        public HomeController(IResourceTypeDataAccess resourceTypeDataAccess,
+            IResourceDataAccess resourceDataAccess)
         {
-            MainViewModel mainViewModel = new MainViewModel();
-            var allResources = resourceTypeDataAccess.GetAllResources();
-            foreach(var resource in allResources)
+            _resourceTypeDataAccess = resourceTypeDataAccess;
+            _resourceDataAccess = resourceDataAccess;
+        }
+
+        public IActionResult Index()
+        {
+            MainViewModel mainViewModel = new MainViewModel()
             {
+                TopResources = new List<ResourcesByTypeModel>()
+            };
 
-            }
+            var allResourceTypes = _resourceTypeDataAccess.GetAllResourceTypes();
+            
+            foreach (var resourceType in allResourceTypes)
+            {
+                ResourcesByTypeModel resourcesByTypeModel = new ResourcesByTypeModel()
+                {
+                    ResourceTypeModel = new ResourceTypeModel()
+                    {
+                        Name = resourceType.Name,
+                        Description = ""
+                    },
+                    Resources = new List<ResourceModel>()
+                };
 
-            //mainViewModel.TopResources = 
+                List<ResourceModel> resourceModels = new List<ResourceModel>();
+                var resources = _resourceDataAccess.GetResourceByType(resourceType.Id);
 
-            return View();
+                foreach (var resource in resources)
+                {
+                    resourcesByTypeModel.Resources.Add(
+                        new ResourceModel()
+                    {
+                        Name = resource.Name,
+                        Description = resource.Description
+                    });
+                }
+
+                mainViewModel.TopResources.Add(resourcesByTypeModel);
+            }            
+
+            return View(mainViewModel);
         }
 
         public IActionResult About()

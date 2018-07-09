@@ -46,7 +46,8 @@ namespace UsefulSites
                 .AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationIdentityDbContext>();
 
-            services.AddTransient<IWebSiteDataAccess, WebSiteDataAccess>();
+            services.AddTransient<IResourceDataAccess, ResourceDataAccess>();
+            services.AddTransient<IResourceTypeDataAccess, ResourceTypeDataAccess>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

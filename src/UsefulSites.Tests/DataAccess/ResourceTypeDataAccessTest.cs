@@ -9,20 +9,21 @@ using Xunit;
 namespace UsefulSites.Tests.DataAccess
 {
     public class ResourceTypeDataAccessTest : BaseDataAccessTest
-    {        
-        
+    {
+        public ResourceTypeDataAccessTest() : base() { }
+
         [Fact]
         public void GetAllResourceTypes_ReturnsWebSites()
         {
             // Arrange
             using (var context = new ApplicationDbContext(_options))
             {
-                context.Database.EnsureDeleted();
+                //context.Database.EnsureDeleted();
 
                 IResourceTypeDataAccess resourceTypeDataAccess = new ResourceTypeDataAccess(context);
 
                 // Act
-                var resourceTypes = resourceTypeDataAccess.GetAllResources();
+                var resourceTypes = resourceTypeDataAccess.GetAllResourceTypes();
 
                 // Assert
                 Assert.Equal(3, resourceTypes.Count());                

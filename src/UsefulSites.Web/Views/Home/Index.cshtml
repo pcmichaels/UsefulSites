@@ -7,11 +7,23 @@
 <div class="row">
     <div class="col-md-3">
         <h2>Top</h2>
-        <table>
-            <tbody>
-                <tr></tr>
-            </tbody>
-        </table>
+        @foreach (var resourceType in Model.TopResources)
+        {
+            <h1>@resourceType.ResourceTypeModel.Name</h1>
+            <h2>@resourceType.ResourceTypeModel.Description</h2>
+
+            @foreach (var resource in resourceType.Resources)
+            {
+            <table>
+                <tbody>
+                    <tr>
+                        <td>@resource.Name</td>
+                        <td>@resource.Description</td>
+                    </tr>
+                </tbody>
+            </table>
+            }
+        }
 
         <p>List of top sites by rating </p>
         <p>and recency will go here</p>

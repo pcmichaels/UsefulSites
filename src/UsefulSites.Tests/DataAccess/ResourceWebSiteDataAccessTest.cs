@@ -9,9 +9,9 @@ using Xunit;
 
 namespace UsefulSites.Tests.DataAccess
 {
-    public class WebSiteDataAccessTest : BaseDataAccessTest
+    public class ResourceWebSiteDataAccessTest : BaseDataAccessTest
     {
-        public WebSiteDataAccessTest() : base() { }
+        public ResourceWebSiteDataAccessTest() : base() { }
 
         [Fact]
         public void GetAllWebSites_ReturnsWebSites()
@@ -40,7 +40,7 @@ namespace UsefulSites.Tests.DataAccess
                 );
                 context.SaveChanges();
 
-                IWebSiteDataAccess webSiteDataAccess = new WebSiteDataAccess(context);
+                IResourceDataAccess webSiteDataAccess = new ResourceDataAccess(context);
 
                 // Act
                 var webSites = webSiteDataAccess.GetAllWebSites();
@@ -106,7 +106,7 @@ namespace UsefulSites.Tests.DataAccess
                 );
                 context.SaveChanges();
 
-                var webSiteDataAccess = new WebSiteDataAccess(context);
+                var webSiteDataAccess = new ResourceDataAccess(context);
 
                 // Act
                 var webSites = webSiteDataAccess.GetCategoryWebSites(1);

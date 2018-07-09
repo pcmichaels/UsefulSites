@@ -36,7 +36,7 @@ namespace UsefulSites.Tools.PopulateTestData
                      .Options;
             ApplicationDbContext applicationDbContext = new ApplicationDbContext(options);
 
-            WebSiteDataAccess wda = new WebSiteDataAccess(applicationDbContext);
+            var dataAccess = new ResourceDataAccess(applicationDbContext);
             ResourceCategoryDataAccess resourceCategoryDataAccess = new ResourceCategoryDataAccess(applicationDbContext);
 
             int[] categories = GetCategories(resourceCategoryDataAccess);
@@ -46,7 +46,7 @@ namespace UsefulSites.Tools.PopulateTestData
                 int category = _random.Next(categories.Length);
                 string webSiteAddress = $"www.{CreateWebAddress()}.{GetExtension()}";
 
-                wda.CreateWebSite(categories[category], $"Test web site {i}", webSiteAddress);
+                dataAccess.CreateWebSite(categories[category], $"Test web site {i}", webSiteAddress);
             }
         }
 

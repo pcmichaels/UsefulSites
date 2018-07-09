@@ -15,9 +15,9 @@ namespace UsefulSites.DataAccess.Api
             _context = context;
         }
 
-        public IEnumerable<ResourceType> GetAllResources()
+        public IEnumerable<ResourceType> GetAllResourceTypes()
         {
-            throw new NotImplementedException();
+            return _context.ResourceTypes;
         }
     }
 }

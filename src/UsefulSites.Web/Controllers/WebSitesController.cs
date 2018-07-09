@@ -11,9 +11,9 @@ namespace UsefulSites.Web.Controllers
 {
     public class WebSitesController : Controller
     {
-        private readonly IWebSiteDataAccess _webSiteAccess;
+        private readonly IResourceDataAccess _webSiteAccess;
 
-        public WebSitesController(IWebSiteDataAccess webSiteAccess)
+        public WebSitesController(IResourceDataAccess webSiteAccess)
         {
             _webSiteAccess = webSiteAccess;
         }

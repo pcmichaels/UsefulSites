@@ -8,11 +8,11 @@ using UsefulSites.DataAccess.DataContext;
 
 namespace UsefulSites.DataAccess.Api
 {
-    public class WebSiteDataAccess : IWebSiteDataAccess
+    public class ResourceDataAccess : IResourceDataAccess
     {
         private readonly ApplicationDbContext _applicationDbContext;
 
-        public WebSiteDataAccess(ApplicationDbContext context)
+        public ResourceDataAccess(ApplicationDbContext context)
         {
             _applicationDbContext = context;
         }
@@ -44,6 +44,11 @@ namespace UsefulSites.DataAccess.Api
             _applicationDbContext.SaveChanges();
 
             return resource.Id;
+        }
+
+        public IEnumerable<Resource> GetResourceByType(int typeId)
+        {
+            return _applicationDbContext.Resources.Where(a => a.ResourceTypeId == typeId);
         }
     }
 }
