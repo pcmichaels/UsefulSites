@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using UsefulSites.DataAccess.Api;
 using UsefulSites.Web.Models;
@@ -43,7 +44,7 @@ namespace UsefulSites.Controllers
                 List<ResourceModel> resourceModels = new List<ResourceModel>();
                 var resources = _resourceDataAccess.GetResourceByType(resourceType.Id);
 
-                foreach (var resource in resources)
+                foreach (var resource in resources.Take(5))
                 {
                     resourcesByTypeModel.Resources.Add(
                         new ResourceModel()
