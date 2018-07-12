@@ -40,11 +40,33 @@ namespace UsefulSites.Tests.DataAccess
                 IResourceTypeDataAccess resourceTypeDataAccess = new ResourceTypeDataAccess(context);
 
                 // Act
-                bool success = resourceTypeDataAccess.AddResourceType(
+                int count = resourceTypeDataAccess.AddResourceType(
                     new ResourceType() { Name = "Test" });
 
                 // Assert
-                Assert.True(success);
+                Assert.Equal(1, count);
+            }
+        }
+
+        [Fact]
+        public void GetAllResourceTypes_ReturnsResources()
+        {
+            // Arrange
+            using (var context = new ApplicationDbContext(_options))
+            {
+                context.Database.EnsureDeleted();
+                IResourceTypeDataAccess resourceTypeDataAccess = new ResourceTypeDataAccess(context);
+                resourceTypeDataAccess.AddResourceType(
+                    new ResourceType() { Name = "test" });
+                resourceTypeDataAccess.AddResourceType(
+                    new ResourceType() { Name = "test2" });
+
+                // Act
+                var resourceTypes = resourceTypeDataAccess.GetAllResourceTypes();
+
+                // Assert
+                Assert.Equal(2, resourceTypes.Count());
+                Assert.Equal("test", resourceTypes.First().Name);
             }
         }
 

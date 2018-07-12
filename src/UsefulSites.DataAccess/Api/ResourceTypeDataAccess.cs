@@ -15,6 +15,13 @@ namespace UsefulSites.DataAccess.Api
             _context = context;
         }
 
+        public int AddResourceType(ResourceType resourceType)
+        {
+            _context.ResourceTypes.Add(resourceType);
+            return _context.SaveChanges();
+
+        }
+
         public IEnumerable<ResourceType> GetAllResourceTypes()
         {
             return _context.ResourceTypes;
