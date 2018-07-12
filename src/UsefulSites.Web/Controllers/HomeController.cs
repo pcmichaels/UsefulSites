@@ -13,10 +13,10 @@ namespace UsefulSites.Controllers
     {
         private readonly IResourceTypeDataAccess _resourceTypeDataAccess;
         private readonly IResourceDataAccess _resourceDataAccess;
-        private readonly ICategoryDataAccess _categoryDataAccess;
+        private readonly IResourceCategoryDataAccess _categoryDataAccess;
 
         public HomeController(IResourceTypeDataAccess resourceTypeDataAccess,
-            IResourceDataAccess resourceDataAccess, ICategoryDataAccess categoryDataAccess)
+            IResourceDataAccess resourceDataAccess, IResourceCategoryDataAccess categoryDataAccess)
         {
             _resourceTypeDataAccess = resourceTypeDataAccess;
             _resourceDataAccess = resourceDataAccess;
@@ -39,7 +39,7 @@ namespace UsefulSites.Controllers
 
         private void GetCategories(MainViewModel mainViewModel)
         {
-            var categories = _categoryDataAccess.GetCategories();
+            var categories = _categoryDataAccess.GetAllCategories();
 
             mainViewModel.Categories = categories
                 .Select(a => new CategoryModel()

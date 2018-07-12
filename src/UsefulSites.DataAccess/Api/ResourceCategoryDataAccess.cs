@@ -32,5 +32,6 @@ namespace UsefulSites.DataAccess.Api
         {
             return _applicationDbContext.ResourceCategories;
         }
+
     }
 }

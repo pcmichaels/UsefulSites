@@ -18,7 +18,7 @@ namespace UsefulSites.Tests.DataAccess
             // Arrange
             using (var context = new ApplicationDbContext(_options))
             {
-                //context.Database.EnsureDeleted();
+                context.Database.EnsureDeleted();
 
                 IResourceTypeDataAccess resourceTypeDataAccess = new ResourceTypeDataAccess(context);
 
