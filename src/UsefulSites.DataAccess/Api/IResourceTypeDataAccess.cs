@@ -6,5 +6,6 @@ namespace UsefulSites.DataAccess.Api
     public interface IResourceTypeDataAccess
     {
         IEnumerable<ResourceType> GetAllResourceTypes();
+        bool AddResourceType(ResourceType resourceType);
     }
 }
