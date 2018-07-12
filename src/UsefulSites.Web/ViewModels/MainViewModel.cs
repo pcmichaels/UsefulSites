@@ -9,5 +9,6 @@ namespace UsefulSites.Web.ViewModels
     public class MainViewModel
     {
         public List<ResourcesByTypeModel> TopResources { get; set; }
+        public List<CategoryModel> Categories { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
@@ -12,23 +13,45 @@ namespace UsefulSites.Controllers
     {
         private readonly IResourceTypeDataAccess _resourceTypeDataAccess;
         private readonly IResourceDataAccess _resourceDataAccess;
+        private readonly ICategoryDataAccess _categoryDataAccess;
 
         public HomeController(IResourceTypeDataAccess resourceTypeDataAccess,
-            IResourceDataAccess resourceDataAccess)
+            IResourceDataAccess resourceDataAccess, ICategoryDataAccess categoryDataAccess)
         {
             _resourceTypeDataAccess = resourceTypeDataAccess;
             _resourceDataAccess = resourceDataAccess;
+            _categoryDataAccess = categoryDataAccess;
         }
 
         public IActionResult Index()
         {
             MainViewModel mainViewModel = new MainViewModel()
             {
-                TopResources = new List<ResourcesByTypeModel>()
+                TopResources = new List<ResourcesByTypeModel>(),
+                Categories = new List<CategoryModel>()
             };
 
+            GetResources(mainViewModel);
+            GetCategories(mainViewModel);
+
+            return View(mainViewModel);
+        }
+
+        private void GetCategories(MainViewModel mainViewModel)
+        {
+            var categories = _categoryDataAccess.GetCategories();
+
+            mainViewModel.Categories = categories
+                .Select(a => new CategoryModel()
+                {
+                    CategoryName = a.Name                    
+                }).ToList();
+        }
+
+        private void GetResources(MainViewModel mainViewModel)
+        {
             var allResourceTypes = _resourceTypeDataAccess.GetAllResourceTypes();
-            
+
             foreach (var resourceType in allResourceTypes)
             {
                 ResourcesByTypeModel resourcesByTypeModel = new ResourcesByTypeModel()
@@ -48,16 +71,14 @@ namespace UsefulSites.Controllers
                 {
                     resourcesByTypeModel.Resources.Add(
                         new ResourceModel()
-                    {
-                        Name = resource.Name,
-                        Description = resource.Description
-                    });
+                        {
+                            Name = resource.Name,
+                            Description = resource.Description
+                        });
                 }
 
                 mainViewModel.TopResources.Add(resourcesByTypeModel);
-            }            
-
-            return View(mainViewModel);
+            }
         }
 
         public IActionResult About()
