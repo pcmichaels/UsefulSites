@@ -1,0 +1,33 @@
+﻿@model UsefulSites.Web.ViewModels.WebSiteListViewModel
+
+@{
+    ViewData["Title"] = "Web Site List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Sites</h2>
+
+<h3>Search: </h3>
+<textarea></textarea>
+
+@foreach (var category in Model.Categories.OrderBy(a => a.CategoryName))
+{
+    <h1>@category.CategoryName</h1>
+
+    <table class="table">
+        <tbody>
+            @foreach (var item in category.WebSiteModels)
+            {
+                <tr>
+                    <td>
+                        @item.Url
+                    </td>
+                    <td>
+                        @item.Description
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+}

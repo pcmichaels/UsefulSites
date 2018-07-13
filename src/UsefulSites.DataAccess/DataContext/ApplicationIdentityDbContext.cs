@@ -12,6 +12,7 @@ namespace UsefulSites.DataAccess.DataContext
         public ApplicationIdentityDbContext(DbContextOptions<ApplicationIdentityDbContext> options)
             : base(options)
         {
-        }
+
+        }        
     }
 }

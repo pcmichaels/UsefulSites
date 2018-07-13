@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using UsefulSites.DataAccess.DataContext;
+using UsefulSites.DataAccess.Api;
 
 namespace UsefulSites
 {
@@ -41,10 +42,12 @@ namespace UsefulSites
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services
-                //.AddIdentity<IdentityUser, IdentityRole>()
+            services                
                 .AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationIdentityDbContext>();
+
+            services.AddTransient<IResourceDataAccess, ResourceDataAccess>();
+            services.AddTransient<IResourceTypeDataAccess, ResourceTypeDataAccess>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

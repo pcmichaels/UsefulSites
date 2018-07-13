@@ -5,6 +5,13 @@ body {
     padding-bottom: 20px;
 }
 
+.banner {
+    height: 100vh;
+    /* Flexbox */
+    display: flex;
+    align-items: center;
+}
+
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
