@@ -36,5 +36,10 @@ namespace UsefulSites.Web.Controllers
 
             return View(webSiteListModel);
         }
+
+        public IActionResult AddSite()
+        {
+            return View(new WebSiteAddViewModel());
+        }
     }
 }

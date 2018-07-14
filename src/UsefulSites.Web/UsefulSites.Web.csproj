@@ -14,4 +14,10 @@
     <ProjectReference Include="..\UsefulSites.DataAccess\UsefulSites.DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Views\WebSites\AddSite.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
 </Project>

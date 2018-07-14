@@ -7,7 +7,7 @@ using UsefulSites.DataAccess.Api;
 using UsefulSites.Web.Models;
 using UsefulSites.Web.ViewModels;
 
-namespace UsefulSites.Controllers
+namespace UsefulSites.Web.Controllers
 {
     public class HomeController : Controller
     {
@@ -84,14 +84,7 @@ namespace UsefulSites.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
+            ViewData["Message"] = "Useful Sites.";
 
             return View();
         }

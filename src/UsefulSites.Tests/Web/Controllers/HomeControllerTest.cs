@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using UsefulSites.Controllers;
 using UsefulSites.DataAccess.Api;
+using UsefulSites.Web.Controllers;
 using UsefulSites.Web.ViewModels;
 using Xunit;
 
