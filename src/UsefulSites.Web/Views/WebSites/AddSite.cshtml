@@ -6,3 +6,9 @@
 }
 
 <p>Submit a new site</p>
+
+<form asp-controller="WebSites" asp-action="AddSite" method="post">
+    <textarea asp-for="Url"></textarea>
+    <textarea asp-for="Description"></textarea>
+    <button type="submit">Submit</button>
+</form>

@@ -7,5 +7,8 @@ namespace UsefulSites.Web.ViewModels
 {
     public class WebSiteAddViewModel
     {
+        public string Url { get; set; }
+
+        public string Description { get; set; }
     }
 }
