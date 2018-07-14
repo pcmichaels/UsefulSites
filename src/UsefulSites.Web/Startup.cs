@@ -48,6 +48,7 @@ namespace UsefulSites
 
             services.AddTransient<IResourceDataAccess, ResourceDataAccess>();
             services.AddTransient<IResourceTypeDataAccess, ResourceTypeDataAccess>();
+            services.AddTransient<IResourceCategoryDataAccess, ResourceCategoryDataAccess>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

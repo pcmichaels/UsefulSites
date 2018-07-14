@@ -44,7 +44,8 @@ namespace UsefulSites.Controllers
             mainViewModel.Categories = categories
                 .Select(a => new CategoryModel()
                 {
-                    CategoryName = a.Name                    
+                    CategoryName = a.Name,
+                    WebSiteModels = new List<WebSiteModel>()
                 }).ToList();
         }
 
