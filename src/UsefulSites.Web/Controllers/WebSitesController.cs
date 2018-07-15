@@ -51,7 +51,7 @@ namespace UsefulSites.Web.Controllers
 
             int result = _webSiteAccess.CreateWebSite(webSiteAddViewModel.Category.Id, webSiteAddViewModel.Description, webSiteAddViewModel.Url);
 
-            return CreatedAtAction(nameof(GetSite), new { id = result });
+            return Redirect($"/WebSites/GetSite/{result}");
         }
 
         [HttpGet("{id}")]
@@ -64,7 +64,7 @@ namespace UsefulSites.Web.Controllers
             }
 
             var resource = result.ToResourceModel();
-            return Ok(resource);
+            return View(resource);
         }
 
         public IActionResult AddSite()
