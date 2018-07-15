@@ -9,5 +9,6 @@ namespace UsefulSites.Web.Models
     {
         public string CategoryName { get; set; }
         public IEnumerable<WebSiteModel> WebSiteModels { get; set; }
+        public int Id { get; set; }
     }
 }

@@ -38,20 +38,20 @@ namespace UsefulSites.Tests.Web.Controllers
             var webSiteController = new WebSitesController(
                 resourceDataAccess);
 
-            int category = 1;
+            int categoryId = 1;
 
             var webSiteViewModel = new WebSiteAddViewModel()
             {
                 Url = "https://www.test.com",
                 Description = "Testing",
-                Category = new CategoryModel() { CategoryName = "test" }
+                Category = new CategoryModel() { CategoryName = "test", Id = categoryId }
             };
 
             // Act
             webSiteController.AddSite(webSiteViewModel);
 
             // Assert
-            resourceDataAccess.Received(1).CreateWebSite(category, "https://www.test.com", "Testing");
+            resourceDataAccess.Received(1).CreateWebSite(categoryId, "Testing", "https://www.test.com");
         }
 
     }

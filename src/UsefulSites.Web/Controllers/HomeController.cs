@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using UsefulSites.DataAccess.Api;
+using UsefulSites.DataAccess.Data;
 using UsefulSites.Web.Models;
 using UsefulSites.Web.ViewModels;
 
@@ -39,11 +40,12 @@ namespace UsefulSites.Web.Controllers
 
         private void GetCategories(MainViewModel mainViewModel)
         {
-            var categories = _categoryDataAccess.GetAllCategories();
+            IEnumerable<ResourceCategory> categories = _categoryDataAccess.GetAllCategories();
 
             mainViewModel.Categories = categories
                 .Select(a => new CategoryModel()
                 {
+                    Id = a.Id,
                     CategoryName = a.Name,
                     WebSiteModels = new List<WebSiteModel>()
                 }).ToList();

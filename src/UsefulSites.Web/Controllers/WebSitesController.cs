@@ -40,7 +40,7 @@ namespace UsefulSites.Web.Controllers
         [HttpPost]
         public void AddSite(WebSiteAddViewModel webSiteAddViewModel)
         {
-            _webSiteAccess.CreateWebSite(1, webSiteAddViewModel.Description, webSiteAddViewModel.Url);
+            _webSiteAccess.CreateWebSite(webSiteAddViewModel.Category.Id, webSiteAddViewModel.Description, webSiteAddViewModel.Url);
         }
 
         public IActionResult AddSite()
