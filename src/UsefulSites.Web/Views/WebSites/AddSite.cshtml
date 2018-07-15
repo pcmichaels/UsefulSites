@@ -8,7 +8,17 @@
 <p>Submit a new site</p>
 
 <form asp-controller="WebSites" asp-action="AddSite" method="post">
-    <textarea asp-for="Url"></textarea>
-    <textarea asp-for="Description"></textarea>
-    <button type="submit">Submit</button>
+    <div class="form-group">
+
+        <label asp-for="Url" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <textarea asp-for="Url"></textarea>
+        </div>
+
+        <label asp-for="Description" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <textarea asp-for="Description"></textarea>
+        </div>
+    </div>
+    <button type="submit" class="img-rounded btn-danger">Submit</button>
 </form>
