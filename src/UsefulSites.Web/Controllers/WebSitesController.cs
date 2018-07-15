@@ -12,10 +12,12 @@ namespace UsefulSites.Web.Controllers
     public class WebSitesController : Controller
     {
         private readonly IResourceDataAccess _webSiteAccess;
+        private readonly IResourceCategoryDataAccess _resourceCategoryDataAccess;
 
-        public WebSitesController(IResourceDataAccess webSiteAccess)
+        public WebSitesController(IResourceDataAccess webSiteAccess, IResourceCategoryDataAccess resourceCategoryDataAccess)
         {
             _webSiteAccess = webSiteAccess;
+            _resourceCategoryDataAccess = resourceCategoryDataAccess;
         }
 
         public IActionResult WebSiteList()
@@ -45,6 +47,8 @@ namespace UsefulSites.Web.Controllers
 
         public IActionResult AddSite()
         {
+            
+
             return View(new WebSiteAddViewModel());
         }
     }
