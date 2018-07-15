@@ -11,6 +11,6 @@ namespace UsefulSites.DataAccess.Api
         IEnumerable<Resource> GetCategoryWebSites(int categoryId);
         int CreateWebSite(int category, string siteName, string webSiteAddress);
         IEnumerable<Resource> GetResourceByType(int typeId);
-
+        Resource GetWebSite(int id);
     }
 }

@@ -14,6 +14,35 @@ namespace UsefulSites.Tests.DataAccess
         public ResourceWebSiteDataAccessTest() : base() { }
 
         [Fact]
+        public void GetWebSite_ReturnsSite()
+        {
+            using (var context = new ApplicationDbContext(_options))
+            {
+                context.Database.EnsureDeleted();
+
+                AddResourceTypes(context);
+                AddCategories(context);
+
+                var site1 = context.Resources.Add(new Resource("test", "test",
+                        context.ResourceTypes.First(a => a.Id == 1),
+                        context.ResourceCategories.First(a => a.Id == 1)));
+                var site2 = context.Resources.Add(new Resource("test2", "test2",
+                        context.ResourceTypes.First(a => a.Id == 1),
+                        context.ResourceCategories.First(a => a.Id == 1)));
+                context.SaveChanges();
+
+                IResourceDataAccess webSiteDataAccess = new ResourceDataAccess(context);
+
+                // Act
+                Resource webSite = webSiteDataAccess.GetWebSite(site1.Entity.Id);
+
+                // Assert
+                Assert.Equal("test", webSite.Name);
+                Assert.Equal(site1.Entity.Id, webSite.Id);
+            }
+        }
+
+        [Fact]
         public void GetAllWebSites_ReturnsWebSites()
         {
             // Arrange
@@ -89,20 +118,12 @@ namespace UsefulSites.Tests.DataAccess
                     new Resource("test2", "test2",
                         context.ResourceTypes.First(a => a.Id == 1),
                         context.ResourceCategories.First(a => a.Id == 1)),
-                    new Resource
-                    {
-                        Id = 3,
-                        Name = "test3",
-                        Description = "test2",
-                        ResourceType = context.ResourceTypes.First(a => a.Id == 1)
-                    },
-                    new Resource
-                    {
-                        Id = 4,
-                        Name = "test4",
-                        Description = "test3",
-                        ResourceType = context.ResourceTypes.First(a => a.Id == 2)
-                    }
+                    new Resource("test3", "test2",
+                        context.ResourceTypes.First(a => a.Id == 1),
+                        context.ResourceCategories.First(a => a.Id == 2)),                    
+                    new Resource("test4", "test3",
+                        context.ResourceTypes.First(a => a.Id == 2),
+                        context.ResourceCategories.First(a => a.Id == 2))                    
                 );
                 context.SaveChanges();
 

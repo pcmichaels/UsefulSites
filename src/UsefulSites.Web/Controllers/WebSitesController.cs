@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using UsefulSites.DataAccess.Api;
+using UsefulSites.DataAccess.Data;
 using UsefulSites.Web.Extensions;
 using UsefulSites.Web.Models;
 using UsefulSites.Web.ViewModels;
@@ -41,9 +42,29 @@ namespace UsefulSites.Web.Controllers
         }
 
         [HttpPost]
-        public void AddSite(WebSiteAddViewModel webSiteAddViewModel)
+        public IActionResult AddSite(WebSiteAddViewModel webSiteAddViewModel)
         {
-            _webSiteAccess.CreateWebSite(webSiteAddViewModel.Category.Id, webSiteAddViewModel.Description, webSiteAddViewModel.Url);
+            if (webSiteAddViewModel.Category == null)
+            {
+                return BadRequest(ModelState);
+            }
+
+            int result = _webSiteAccess.CreateWebSite(webSiteAddViewModel.Category.Id, webSiteAddViewModel.Description, webSiteAddViewModel.Url);
+
+            return CreatedAtAction(nameof(GetSite), new { id = result });
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetSite(int id)
+        {
+            Resource result = _webSiteAccess.GetWebSite(id);
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            var resource = result.ToResourceModel();
+            return Ok(resource);
         }
 
         public IActionResult AddSite()

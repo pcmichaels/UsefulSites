@@ -19,6 +19,18 @@ namespace UsefulSites.Web.Extensions
                 });
 
             return categoryModels;
-        }        
+        }
+
+        public static ResourceModel ToResourceModel(this Resource resource)
+        {
+            var resourceModel = new ResourceModel()
+            {
+                Name = resource.Name,
+                Description = resource.Description
+            };
+
+            return resourceModel;
+        }
+
     }
 }

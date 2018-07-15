@@ -50,5 +50,10 @@ namespace UsefulSites.DataAccess.Api
         {
             return _applicationDbContext.Resources.Where(a => a.ResourceTypeId == typeId);
         }
+
+        public Resource GetWebSite(int id)
+        {
+            return _applicationDbContext.Resources.SingleOrDefault(a => a.Id == id);
+        }
     }
 }

@@ -84,5 +84,49 @@ namespace UsefulSites.Tests.Web.Controllers
             resourceDataAccess.Received(1).CreateWebSite(categoryId, "Testing", "https://www.test.com");
         }
 
+        [Fact]
+        public void GetSite_SingleEntry()
+        {
+            // Arrange
+            int siteId = 1;
+
+            var resourceDataAccess = Substitute.For<IResourceDataAccess>();
+            resourceDataAccess.GetWebSite(siteId).Returns(new Resource() { Id = 1, Name = "test" });
+
+            var resourceCategoryDataAccess = Substitute.For<IResourceCategoryDataAccess>();
+
+            var webSiteController = new WebSitesController(
+                resourceDataAccess, resourceCategoryDataAccess);
+
+            // Act
+            var result = webSiteController.GetSite(1);
+
+            // Assert
+            OkObjectResult okResult = Assert.IsType<OkObjectResult>(result);
+            ResourceModel resource = Assert.IsType<ResourceModel>(okResult.Value);            
+            Assert.NotNull(resource);
+            Assert.Equal("test", resource.Name);
+            resourceDataAccess.Received(1).GetWebSite(siteId);            
+        }
+
+        [Fact]
+        public void GetSite_NoData()
+        {
+            // Arrange
+            var resourceDataAccess = Substitute.For<IResourceDataAccess>();
+            var resourceCategoryDataAccess = Substitute.For<IResourceCategoryDataAccess>();
+
+            var webSiteController = new WebSitesController(
+                resourceDataAccess, resourceCategoryDataAccess);
+
+            int siteId = 1;
+
+            // Act
+            webSiteController.GetSite(1);
+
+            // Assert
+            resourceDataAccess.Received(1).GetWebSite(siteId);
+        }
+
     }
 }
