@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using UsefulSites.DataAccess.Api;
+using UsefulSites.Web.Extensions;
 using UsefulSites.Web.Models;
 using UsefulSites.Web.ViewModels;
 
@@ -47,9 +48,10 @@ namespace UsefulSites.Web.Controllers
 
         public IActionResult AddSite()
         {
-            
+            var webSiteViewModel = new WebSiteAddViewModel();
+            webSiteViewModel.Categories = _resourceCategoryDataAccess.GetAllCategories().ToCategoryModels();
 
-            return View(new WebSiteAddViewModel());
+            return View(webSiteViewModel);
         }
     }
 }
