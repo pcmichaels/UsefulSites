@@ -1,0 +1,25 @@
+﻿@model UsefulSites.Web.ViewModels.WebSiteAddViewModel
+
+@{
+    ViewData["Title"] = "Add New Site";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p>An Error Has occurred</p>
+
+    <div class="form-group">
+
+        <label asp-for="Url" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <textarea asp-for="Url"></textarea>
+        </div>
+
+        <label asp-for="Description" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <textarea asp-for="Description"></textarea>
+        </div>
+    </div>
+
+<div>
+    Is invalid!
+</div>

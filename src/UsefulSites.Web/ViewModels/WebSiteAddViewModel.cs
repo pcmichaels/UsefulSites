@@ -13,5 +13,7 @@ namespace UsefulSites.Web.ViewModels
         public string Url { get; set; }
 
         public string Description { get; set; }
+
+        public string Error { get; set; }
     }
 }
