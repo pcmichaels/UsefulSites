@@ -45,9 +45,8 @@ namespace UsefulSites.Web.Controllers
         public IActionResult AddSite(WebSiteAddViewModel webSiteAddViewModel)
         {
             if (webSiteAddViewModel.Category == null)
-            {
-                webSiteAddViewModel.Error = "Category Not Valid";
-                return RedirectToAction("AddSiteError", webSiteAddViewModel);
+            {                
+                return RedirectToAction("AddSite", routeValues: "Category Not Valid");
             }
 
             int result = _webSiteAccess.CreateWebSite(webSiteAddViewModel.Category.Id, webSiteAddViewModel.Description, webSiteAddViewModel.Url);
@@ -68,17 +67,20 @@ namespace UsefulSites.Web.Controllers
             return View(resource);
         }
 
-        public IActionResult AddSite()
+        public IActionResult AddSite(string error)
         {
             var webSiteViewModel = new WebSiteAddViewModel();
             webSiteViewModel.Categories = _resourceCategoryDataAccess.GetAllCategories().ToCategoryModels();
+            webSiteViewModel.Error = error;
 
             return View(webSiteViewModel);
+
         }
 
-        public IActionResult AddSiteError(WebSiteAddViewModel viewModel)
+        public IActionResult AddSite()
         {
-            return View(viewModel);
+            return AddSite(string.Empty);
         }
+
     }
 }

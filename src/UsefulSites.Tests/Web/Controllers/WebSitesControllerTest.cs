@@ -151,7 +151,8 @@ namespace UsefulSites.Tests.Web.Controllers
             // Assert
             var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
             Assert.Null(redirectToActionResult.ControllerName);
-            Assert.Equal("AddSiteError", redirectToActionResult.ActionName);            
+            Assert.Equal("AddSite", redirectToActionResult.ActionName);
+            
         }
 
         [Fact]
