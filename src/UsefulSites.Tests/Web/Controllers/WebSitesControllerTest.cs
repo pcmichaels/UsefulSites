@@ -138,7 +138,7 @@ namespace UsefulSites.Tests.Web.Controllers
             var webSiteController = new WebSitesController(
                 resourceDataAccess, resourceCategoryDataAccess);
 
-            var webSiteViewModel = new WebSiteAddViewModel()
+            var webSiteAddViewModel = new WebSiteAddViewModel()
             {
                 Category = null,
                 Description = "test",
@@ -146,7 +146,7 @@ namespace UsefulSites.Tests.Web.Controllers
             };
 
             // Act
-            var result = webSiteController.AddSite();
+            var result = webSiteController.AddSite(webSiteAddViewModel);
 
             // Assert
             var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
