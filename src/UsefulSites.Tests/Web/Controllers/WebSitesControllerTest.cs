@@ -154,5 +154,31 @@ namespace UsefulSites.Tests.Web.Controllers
             Assert.Equal("AddSiteError", redirectToActionResult.ActionName);            
         }
 
+        [Fact]
+        public void AddSite_Success_RedirectGetSite()
+        {
+            // Arrange
+            var resourceDataAccess = Substitute.For<IResourceDataAccess>();
+            var resourceCategoryDataAccess = Substitute.For<IResourceCategoryDataAccess>();
+
+            var webSiteController = new WebSitesController(
+                resourceDataAccess, resourceCategoryDataAccess);
+
+            var webSiteAddViewModel = new WebSiteAddViewModel()
+            {
+                Category = new CategoryModel(),
+                Description = "test",
+                Url = "aa.test.com"
+            };
+
+            // Act
+            var result = webSiteController.AddSite(webSiteAddViewModel);
+
+            // Assert
+            var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+            Assert.Null(redirectToActionResult.ControllerName);
+            Assert.Equal("GetSite", redirectToActionResult.ActionName);
+        }
+
     }
 }

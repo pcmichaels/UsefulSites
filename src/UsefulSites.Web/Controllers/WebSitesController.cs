@@ -46,12 +46,12 @@ namespace UsefulSites.Web.Controllers
         {
             if (webSiteAddViewModel.Category == null)
             {
-                return BadRequest(ModelState);
+                return RedirectToAction("AddSiteError", routeValues: "CategoryNotValid");
             }
 
             int result = _webSiteAccess.CreateWebSite(webSiteAddViewModel.Category.Id, webSiteAddViewModel.Description, webSiteAddViewModel.Url);
 
-            return Redirect($"/WebSites/GetSite/{result}");
+            return RedirectToAction("GetSite", result);
         }
 
         [HttpGet("{id}")]
