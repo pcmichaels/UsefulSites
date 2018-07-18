@@ -102,8 +102,8 @@ namespace UsefulSites.Tests.Web.Controllers
             var result = webSiteController.GetSite(1);
 
             // Assert
-            OkObjectResult okResult = Assert.IsType<OkObjectResult>(result);
-            ResourceModel resource = Assert.IsType<ResourceModel>(okResult.Value);            
+            ViewResult viewResult = Assert.IsType<ViewResult>(result);
+            ResourceModel resource = Assert.IsType<ResourceModel>(viewResult.Model);            
             Assert.NotNull(resource);
             Assert.Equal("test", resource.Name);
             resourceDataAccess.Received(1).GetWebSite(siteId);            
@@ -126,6 +126,32 @@ namespace UsefulSites.Tests.Web.Controllers
 
             // Assert
             resourceDataAccess.Received(1).GetWebSite(siteId);
+        }
+
+        [Fact]
+        public void AddSite_NoCategory_RedirectError()
+        {
+            // Arrange
+            var resourceDataAccess = Substitute.For<IResourceDataAccess>();
+            var resourceCategoryDataAccess = Substitute.For<IResourceCategoryDataAccess>();
+
+            var webSiteController = new WebSitesController(
+                resourceDataAccess, resourceCategoryDataAccess);
+
+            var webSiteViewModel = new WebSiteAddViewModel()
+            {
+                Category = null,
+                Description = "test",
+                Url = "aa.test.com"
+            };
+
+            // Act
+            var result = webSiteController.AddSite();
+
+            // Assert
+            var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+            Assert.Null(redirectToActionResult.ControllerName);
+            Assert.Equal("AddSiteError", redirectToActionResult.ActionName);            
         }
 
     }
