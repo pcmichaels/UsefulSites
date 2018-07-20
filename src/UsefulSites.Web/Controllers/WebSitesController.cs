@@ -67,6 +67,7 @@ namespace UsefulSites.Web.Controllers
             return View(resource);
         }
 
+        [HttpGet("{error}")]
         public IActionResult AddSite(string error)
         {
             var webSiteViewModel = new WebSiteAddViewModel();
@@ -77,6 +78,7 @@ namespace UsefulSites.Web.Controllers
 
         }
 
+        [HttpGet]
         public IActionResult AddSite()
         {
             return AddSite(string.Empty);
