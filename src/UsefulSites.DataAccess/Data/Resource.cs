@@ -36,5 +36,6 @@ namespace UsefulSites.DataAccess.Data
 
         [ForeignKey("ResourceCategoryId")]
         public ResourceCategory ResourceCategory { get; set; }
+        public int Rating { get; set; }
     }
 }

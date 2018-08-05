@@ -74,7 +74,8 @@ namespace UsefulSites.Tests.Web.Controllers
             {
                 Url = "https://www.test.com",
                 Description = "Testing",
-                Category = new CategoryModel() { CategoryName = "test", Id = categoryId }
+                CategoryId = 2,
+                Category = "test"
             };
 
             // Act
@@ -167,7 +168,7 @@ namespace UsefulSites.Tests.Web.Controllers
 
             var webSiteAddViewModel = new WebSiteAddViewModel()
             {
-                Category = new CategoryModel(),
+                Category = "",
                 Description = "test",
                 Url = "aa.test.com"
             };

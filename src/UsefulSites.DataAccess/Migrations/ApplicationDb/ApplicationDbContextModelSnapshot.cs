@@ -33,6 +33,8 @@ namespace UsefulSites.DataAccess.Migrations.ApplicationDb
 
                     b.Property<string>("Name");
 
+                    b.Property<int>("Rating");
+
                     b.Property<int>("ResourceCategoryId");
 
                     b.Property<int>("ResourceTypeId");

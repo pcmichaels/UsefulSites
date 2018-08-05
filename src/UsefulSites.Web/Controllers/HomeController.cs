@@ -53,6 +53,9 @@ namespace UsefulSites.Web.Controllers
 
         private void GetResources(MainViewModel mainViewModel)
         {
+            mainViewModel.AllWebSites = new List<WebSiteModel>();
+            int topResourceCount = 5;
+
             var allResourceTypes = _resourceTypeDataAccess.GetAllResourceTypes();
 
             foreach (var resourceType in allResourceTypes)
@@ -70,14 +73,20 @@ namespace UsefulSites.Web.Controllers
                 List<ResourceModel> resourceModels = new List<ResourceModel>();
                 var resources = _resourceDataAccess.GetResourceByType(resourceType.Id);
 
-                foreach (var resource in resources.Take(5))
+                int resourceCount = 0;
+                foreach (var resource in resources.OrderByDescending(a => a.Rating))
                 {
-                    resourcesByTypeModel.Resources.Add(
-                        new ResourceModel()
-                        {
-                            Name = resource.Name,
-                            Description = resource.Description
-                        });
+                    var resourceModel = new WebSiteModel()
+                    {
+                        Name = resource.Name,
+                        Description = resource.Description
+                    };
+
+                    if (resourceCount++ < topResourceCount)
+                    {
+                        resourcesByTypeModel.Resources.Add(resourceModel);
+                    }
+                    mainViewModel.AllWebSites.Add(resourceModel);
                 }
 
                 mainViewModel.TopResources.Add(resourcesByTypeModel);

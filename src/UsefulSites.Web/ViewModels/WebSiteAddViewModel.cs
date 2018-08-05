@@ -8,8 +8,9 @@ namespace UsefulSites.Web.ViewModels
 {
     public class WebSiteAddViewModel
     {
-        public IEnumerable<CategoryModel> Categories { get; set; }
-        public CategoryModel Category { get; set; }
+        public string Category { get; set; }
+        public int? CategoryId { get; set; }
+        public IEnumerable<CategoryModel> Categories { get; set; }        
         public string Url { get; set; }
 
         public string Description { get; set; }

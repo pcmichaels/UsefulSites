@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using UsefulSites.Web.Interfaces;
 
 namespace UsefulSites.Web.Models
 {
-    public class WebSiteModel : ResourceModel
+    public class WebSiteModel : ResourceModel, ISearchResult
     {
         [Display(Name = "Address")]
         public string Url { get; set; }

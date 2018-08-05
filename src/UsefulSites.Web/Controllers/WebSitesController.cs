@@ -44,13 +44,15 @@ namespace UsefulSites.Web.Controllers
         [HttpPost]
         public IActionResult AddSite(WebSiteAddViewModel webSiteAddViewModel)
         {
-            if (webSiteAddViewModel.Category == null)
+            if (webSiteAddViewModel.Category == null 
+                || !webSiteAddViewModel.CategoryId.HasValue)
             {                
                 return RedirectToAction(
                     "AddSite", routeValues: new { error = "Category Not Valid" });
             }
 
-            int result = _webSiteAccess.CreateWebSite(webSiteAddViewModel.Category.Id, webSiteAddViewModel.Description, webSiteAddViewModel.Url);
+            int result = _webSiteAccess.CreateWebSite(
+                webSiteAddViewModel.CategoryId.Value, webSiteAddViewModel.Description, webSiteAddViewModel.Url);
 
             return RedirectToAction("GetSite", result);
         }

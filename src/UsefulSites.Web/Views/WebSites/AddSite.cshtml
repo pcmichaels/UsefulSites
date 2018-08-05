@@ -12,6 +12,16 @@
 <form asp-controller="WebSites" asp-action="AddSite" method="post">
     <div class="form-group">
 
+        <label asp-for="Category" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <textarea asp-for="Category"></textarea>
+            <select asp-for="CategoryId"
+                    class="form-control"
+                    asp-items="@(new SelectList(Model.Categories))">
+
+            </select>
+        </div>
+
         <label asp-for="Url" class="col-md-2 control-label"></label>
         <div class="col-md-10">
             <textarea asp-for="Url"></textarea>
