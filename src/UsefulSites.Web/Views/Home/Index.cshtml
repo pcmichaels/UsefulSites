@@ -6,6 +6,12 @@
 
 <div class="row">
     <div class="jumbotron">
+        <div id="content"></div>
+        <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/16.4.0/umd/react.development.js"></script>
+        <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.4.0/umd/react-dom.development.js"></script>
+        <script src="@Url.Content("~/js/search.jsx")"></script>
+    </div>
+    <!--
         <h2>Search</h2>
         <div class="search-control">
             <input asp-for="SearchText"
@@ -18,13 +24,14 @@
                 @foreach (var result in Model.SearchResults)
                 {
                     <tr>
-                        <td>@result.Description</td>                        
+                        <td>@result.Description</td>
                     </tr>
 
                 }
             </tbody>
         </table>
     </div>
+        -->
 </div>
 
 <div class="row">

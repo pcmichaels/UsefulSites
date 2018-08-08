@@ -8,6 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using UsefulSites.DataAccess.DataContext;
 using UsefulSites.DataAccess.Api;
+using React.AspNet;
+using System;
 
 namespace UsefulSites
 {
@@ -21,7 +23,7 @@ namespace UsefulSites
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -50,7 +52,12 @@ namespace UsefulSites
             services.AddTransient<IResourceTypeDataAccess, ResourceTypeDataAccess>();
             services.AddTransient<IResourceCategoryDataAccess, ResourceCategoryDataAccess>();
 
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddReact();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            return services.BuildServiceProvider();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,8 +73,14 @@ namespace UsefulSites
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
-
+            
             app.UseHttpsRedirection();
+
+            app.UseReact(config =>
+            {
+
+            });
+
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
